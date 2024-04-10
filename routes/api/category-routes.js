@@ -32,64 +32,39 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   // create a new category
-  Category.create(req.body)
-  .then((category) => {
-    res.status(201).json(category);
-  })
-  .catch((err) => {
-    console.log(err);
-    res.status(400).json(err);
+  try {
+    const newCategory = await Category.create(req.body);
+    res.status(201).json(newCategory);
+  } catch (err) {
+    res.status(500).json(err);
+  }
   });
-});
 
-router.put('/:id', (req, res) => {
+router.put('/:id', async (req, res) => {
   // update a category by its `id` value
-  Category.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-  })
-    .then((category) => {
-      if (req.body.productIds && req.body.productIds.length) {
-        Category.findAll({
-          where: { category_id: req.params.id }
-        }).then((category) => {
-          const categoryIds = category.map(({ product_id }) => product_id);
-          const newCategoryIds = req.body.productIds
-          .filter((product_id) => !categoryIds.includes(product_id))
-          .map((product_id) => ({
-              product_id, 
-              category_id: req.params.id,
-            }));
-          const categoryIdstoRemove = category
-          .filter(({ product_id }) => !req.body.productIds.includes(product_id))
-          .map(({ id }) => id);
-          return Promise.all([
-            Category.destroy({ where: { id: categoryIdsToRemove } }),
-            Category.bulkCreate(newCategoryIds),
-          ]);  
-        })
-      }
-      return res.json(category);
-    })
-    .catch((err) => {
-      res.status(400).json(err);
-    });
+  try {
+    const categoryData = await Category.update(req.body, {
+    where: {id: req.params.id,},
+  });
+    res.status(200).json(categoryData);
+} catch (err) {res.status(400).json(err);}
+
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
-  Category.destroy({
+  try {
+    const deleteCategory = await Category.destroy({
     where: {
       id: req.params.id,
     },
-  })
-  .then((deletedCategory) => {
-    res.json(deletedCategory);
-  })
-  .catch((err) => res.json(err));
+  });
+    res.status(200).json(deleteCategory);
+} catch (err) {
+  res.status(400).json(err);
+}
 });
 
 module.exports = router;
