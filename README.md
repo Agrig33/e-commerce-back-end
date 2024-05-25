@@ -1,4 +1,4 @@
-# E-Commerce-Back-End ## License
+# E-Commerce-Back-End 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
@@ -33,7 +33,7 @@ This was created to demonstrate the back end for an e-commerce site.
   6. Open localhost in Insomnia
 
 ## Video Tutorial
-<b>[See Demo] </b>
+<b>[See Demo] </b> (https://drive.google.com/file/d/1kEh6OdFxGtxpZwfZbMJMhIsrYJX5LVjF/view)
 
 ## Contributions
 
@@ -47,11 +47,6 @@ This was created to demonstrate the back end for an e-commerce site.
 
 ## Questions
 If you have questions, please feel free to contact me [Agrig33](https://github.com/Agrig33). 
-
-## Mock Up
-![Alt Text](./assets/13-orm-homework-demo-01.gif)
-![Alt Text](./assets/13-orm-homework-demo-02.gif)
-![Alt Text](./assets/13-orm-homework-demo-03.gif)
 
 ## Link to Github Repository 
 https://github.com/Agrig33/e-commerce-back-end
